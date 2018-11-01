@@ -1,4 +1,4 @@
-package demo
+ï»¿package demo
 
 import (
 	"fmt"
@@ -25,10 +25,10 @@ func (this Student) Hello(word string) {
 }
 
 /*
-  »ñÈ¡¶ÔÏóµÄĞÅÏ¢
+  è·å–å¯¹è±¡çš„ä¿¡æ¯
 */
 func StructInfo(o interface{}) {
-	//»ñÈ¡¶ÔÏóµÄÀàĞÍ
+	//è·å–å¯¹è±¡çš„ç±»å‹
 	t := reflect.TypeOf(o)
 	fmt.Println(t.Name(), "object type: ", t.Name())
 
@@ -37,23 +37,23 @@ func StructInfo(o interface{}) {
 		return
 	}
 
-	//»ñÈ¡¶ÔÏóµÄÖµ
+	//è·å–å¯¹è±¡çš„å€¼
 	v := reflect.ValueOf(o)
 	fmt.Println(t.Name(), "object value: ", v)
 
-	//»ñÈ¡¶ÔÏóµÄ×Ö¶Î
+	//è·å–å¯¹è±¡çš„å­—æ®µ
 	fmt.Println(t.Name(), "fields: ")
 	for i := 0; i < t.NumField(); i++ {
 		f := t.Field(i)
 		val := v.Field(i).Interface()
 		fmt.Printf("%6s:%v = %v \n", f.Name, f.Type, val)
-		//Í¨¹ıµİ¹éµ÷ÓÃ»ñÈ¡×ÓÀàĞÍµÄĞÅÏ¢
+		//é€šè¿‡é€’å½’è°ƒç”¨è·å–å­ç±»å‹çš„ä¿¡æ¯
 		t1 := reflect.TypeOf(val)
 		if k := t1.Kind(); k == reflect.Struct {
 			StructInfo(val)
 		}
 	}
-	//»ñÈ¡¶ÔÏóµÄº¯Êı
+	//è·å–å¯¹è±¡çš„å‡½æ•°
 	fmt.Println(t.Name(), "methods: ", t.NumMethod())
 	for i := 0; i < t.NumMethod(); i++ {
 		m := t.Method(i)
@@ -62,7 +62,7 @@ func StructInfo(o interface{}) {
 }
 
 /*
-  ÄäÃû×Ö¶ÎµÄ·´Éä
+  åŒ¿åå­—æ®µçš„åå°„
 */
 func Annoy(o interface{}) {
 	t := reflect.TypeOf(o)
@@ -73,37 +73,37 @@ func Annoy(o interface{}) {
 }
 
 /*
-  Í¨¹ı·´ÉäÉèÖÃ×Ö¶Î
+  é€šè¿‡åå°„è®¾ç½®å­—æ®µ
 */
 func ReflectSet(o interface{}) {
 	v := reflect.ValueOf(o)
 	if v.Kind() == reflect.Ptr && !v.Elem().CanSet() {
-		fmt.Println("ĞŞ¸ÄÊ§°Ü")
+		fmt.Println("ä¿®æ”¹å¤±è´¥")
 		return
 	}
 	v = v.Elem()
-	//»ñÈ¡×Ö¶Î
+	//è·å–å­—æ®µ
 	f := v.FieldByName("Name")
 	if !f.IsValid() {
-		fmt.Println("ĞŞ¸ÄÊ§°Ü")
+		fmt.Println("ä¿®æ”¹å¤±è´¥")
 		return
 	}
-	//ÉèÖÃÖµ
+	//è®¾ç½®å€¼
 	if f.Kind() == reflect.String {
 		f.SetString("chairis")
 	}
 }
 
 /*
-  Í¨¹ı·´Éäµ÷ÓÃº¯Êı
+  é€šè¿‡åå°„è°ƒç”¨å‡½æ•°
 */
 func ReflectMethod(o interface{}) {
 	v := reflect.ValueOf(o)
-	//ÎŞ²Îº¯Êıµ÷ÓÃ
+	//æ— å‚å‡½æ•°è°ƒç”¨
 	m1 := v.MethodByName("Say")
 	m1.Call([]reflect.Value{})
 
-	//ÓĞ²Îº¯Êıµ÷ÓÃ
+	//æœ‰å‚å‡½æ•°è°ƒç”¨
 	m2 := v.MethodByName("Hello")
 	m2.Call([]reflect.Value{reflect.ValueOf("iris")})
 }
