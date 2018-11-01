@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/gocity/test_reflect"
+     . "github.com/gocity/test_reflect/stu_demo"
 )
 
 func main() {
