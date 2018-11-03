@@ -1,6 +1,9 @@
 ﻿package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 // 定义一个接口类型
 type USB interface {
@@ -49,4 +52,30 @@ func main() {
 	a = PhoneConnecter{"PhoneConnt"}
 	a.Connect()
 	Disconnect(a)
+
+	ch1 := make(chan int)
+	ch2 := make(chan int)
+
+	go func(ch chan int) {
+		<-ch
+		fmt.Println("  ch1  call!")
+	}(ch1)
+	go func(ch chan int) {
+		ch <- 2
+		fmt.Println("  ch2  call!")
+	}(ch2)
+
+	time.Sleep(time.Second)
+
+	for {
+		select {
+		case ch1 <- 1:
+			fmt.Println("Send operation on ch1 works!")
+		case <-ch2:
+			fmt.Println("Receive operation on ch2 works!")
+		default:
+			fmt.Println("Exit now!")
+			return
+		}
+	}
 }
