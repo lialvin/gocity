@@ -57,16 +57,16 @@ func  Push_transfer_UOS() {
 	api := uos.New(getAPIURL())
 
 	keyBag := &uos.KeyBag{}
-	err := keyBag.ImportPrivateKey("5KZFFvmiphLWfxBZEGV3URdGkvpgb3j2ssqA9MoMxeBb1JiNRCt")
+	err := keyBag.ImportPrivateKey("5JifSQWXDYCdf2qAhfGWpkJM83XmcRuS9uskt5YcUJgyDTrjxhC")
 	if err != nil {
 		panic(fmt.Errorf("import private key: %s", err))
 	}
 	api.SetSigner(keyBag)
 
-	from := uos.AccountName("uosuser1")
-	to := uos.AccountName("uosuser2")
+	from := uos.AccountName("uosuidwallet")
+	to := uos.AccountName("ulordusertm2")
 	quantity, err := uos.NewUOSAssetFromString("1.0000 UOS")
-	memo := ""
+	memo := "uidback"
 
 	if err != nil {
 		panic(fmt.Errorf("invalid quantity: %s", err))
@@ -113,6 +113,7 @@ func main() {
 
     err2:=  inforow1.JSONToStructs( &out )
 
+    Push_transfer_UOS();
     fmt.Println(" uiduoswallet len   ", len(out) )    
     
     
