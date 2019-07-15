@@ -9,10 +9,11 @@ import (
 
 func main() {
 
-    api := uos.New("http://testnet1.eos.io")
+    api := uos.New("https://testrpc1.uosio.org:20580")
     infoResp, _ := api.GetInfo()
-    accountResp, _ := api.GetAccount("initn")
+    accountResp, _ := api.GetAccount("uosio")
     fmt.Println("info rest:",infoResp)
     fmt.Println("Permission for initn:", accountResp.Permissions[0].RequiredAuth.Keys)
+    
  
 }
