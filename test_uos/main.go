@@ -41,12 +41,33 @@ func  getTime()  int {
     return time 
 }
 
+/*UidSystemData      map[string]UidSystem    `json:"uidsystemdata"`
+UidAccountData     map[string]UidAccount   `json:"uidaccountdata"` 
+UidTimeData        map[int][]UidSystem     `json:"uidtimedata"` 
+sslice             []int                   `json:"uidsloce"` 
+startresult        map[string]int          `json:"startresult"` */
+
+type  testa   struct{
+
+    UidAccountData     map[string]UidAccount   `json:"uidaccountdata"`
+   // UidAccount     map[string]UidAccount   `json:"uidaccountdata"`
+}
 
 
 func main() {    
-    
+        
     // fmt.Printf("Your name is %s", input)
-    uidSysObj := new(UidSys)
+    //var sss UidAccount
+
+    //uidtest := testa{  ( map[string]UidAccount ) }
+    //uidtest.UidAccountData["23"]= sss
+
+    uidSysObj := UidSys{ UidSystemData: map[string]UidSystem{} ,UidAccountData:map[string]UidAccount{} ,UidTimeData: map[int][]UidSystem {}, Startresult: map[string]int{} }
+    // UidSystemData =make( map[string]UidSystem ) ,
+    //              UidAccountData=make( map[string]UidSystem ),UidTimeData= make( map[int][]UidSystem),startresult= make(map[string]int )   }
+    //uidSysObj.SyncUid("1000")
+    //uidSysObj.ReadfromFile()   
+    //uidSysObj.StatByTime( 1000, 1793267809 )  
     for {
         display()
         inputReader := bufio.NewReader(os.Stdin)
@@ -56,24 +77,25 @@ func main() {
         switch keyval {
             case "1" :
                 fmt.Println("read from file !")
-                uidSysObj.ReadfromFile("D:\\uidsystemdata.txt")                   
+                uidSysObj.ReadfromFile()   
             case "2":
                 fmt.Println("write to  file  !")
-                uidSysObj.WritetoFile("D:\\uidsystemdata.txt")                                
+                uidSysObj.WritetoFile( )                                
             case "3":
                 fmt.Println("sync from uos node")
                 uidSysObj.SyncUid("1000")
             case "4":
                 startTime:= getTime()
                 endTime:= getTime()
-                fmt.Println("stat from uos node")                
+                fmt.Println("stat from uos node",startTime, endTime )        
+                //uidSysObj.StatByTime( 1503176126, 1693267809 )        
                 uidSysObj.StatByTime(startTime ,endTime )               
             case "5":
                 uid:=getinput()
                 uidSysObj.printuid(uid)
             case "6":    
                 fmt.Println("exit sysyem")
-                uidSysObj.WritetoFile("D:\\uidsystemdata.txt") 
+                //uidSysObj.WritetoFile( ) 
                 os.Exit(0)
         }
     }
